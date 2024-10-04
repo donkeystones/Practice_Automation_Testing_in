@@ -74,3 +74,19 @@ test('Home page - images in arrivals should navigate to product page - Mastering
   await page.getByRole('link', { name: 'Reviews (0)' }).click();
   await expect(page.getByRole('heading', { name: 'Reviews' })).toBeVisible();  
 });
+
+test('Home page - Arrivals - Images - Add to basket', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await expect(page.locator('#wpmenucartli')).toContainText('0 items₹0.00');
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await expect(page.locator('#wpmenucartli')).toContainText('1 item₹500.00');
+});
+
+test('Home page - Arrivals - Images - Add to basket with more books', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await expect(page.locator('#wpmenucartli')).toContainText('0 items₹0.00');
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await expect(page.locator('#wpmenucartli')).toContainText('1 item₹500.00');
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await expect(page.locator('#wpmenucartli')).toContainText('2 items₹1,000.00');
+});
