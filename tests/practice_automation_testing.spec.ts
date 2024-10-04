@@ -29,10 +29,17 @@ test('Home page - images in arrivals should navigate to product page - Selenium 
     await expect(page.locator('#product-160')).toContainText('₹500.00');
   });
 
+  
   test('Home page - images in arrivals should navigate to product page - Selenium Ruby Product - Check Description', async ({ page }) => {
     await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
     await expect(page.getByText('The Selenium WebDriver').first()).toBeVisible();
-});
+  });
+  
+  test('Home page - images in arrivals should navigate to product page - Selenium Ruby Product - Check reviews', async ({ page }) => {
+    await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+    await page.getByRole('link', { name: 'Reviews (0)' }).click();
+    await expect(page.getByRole('heading', { name: 'Reviews' })).toBeVisible();  
+  });
 
   test('Home page - images in arrivals should navigate to product page - Thinking in HTML Product - Check title and price', async ({ page }) => {
     await page.getByRole('link', { name: 'Sale! Thinking in HTML' }).click();
