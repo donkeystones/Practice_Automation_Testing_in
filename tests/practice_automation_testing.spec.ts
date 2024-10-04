@@ -149,3 +149,4 @@ test('Home - Arrivals - Add to Basket - Items - Add Book', async ({ page }) => {
   await page.getByRole('button', { name: 'Update Basket' }).click();
   await expect(page.locator('#page-34')).toContainText('₹1,000.00');
 });
+
