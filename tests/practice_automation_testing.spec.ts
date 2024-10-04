@@ -130,3 +130,11 @@ test('Home - Arrivals - Add to basket - Coupon not available to books under 450'
   await expect(page.locator('#page-34')).toContainText('₹400.00');
   await expect(page.getByRole('strong')).toContainText('₹408.00');
 })
+
+test('Home - Arrivals - Add to basket - Items - Remove Book', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: 'View Basket' }).click();
+  await page.getByRole('link', { name: '×' }).click();
+  await expect(page.locator('#page-34')).toContainText('Your basket is currently empty.');
+});
