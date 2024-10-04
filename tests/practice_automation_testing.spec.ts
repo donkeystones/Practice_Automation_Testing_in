@@ -118,3 +118,15 @@ test('Home - Arrivals - Add to basket - checkout - apply coupon', async ({ page 
   await expect(page.locator('#page-34')).toContainText('-₹50.00, Free shipping coupon [Remove]');
   await expect(page.locator('#page-34')).toContainText('₹459.00');
 });
+
+test('Home - Arrivals - Add to basket - Coupon not available to books under 450', async ({ page }) => {
+  await page.getByRole('link', { name: 'Sale! Thinking in HTML' }).click();
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: 'View Basket' }).click();
+  await page.getByPlaceholder('Coupon code').click();
+  await page.getByPlaceholder('Coupon code').fill('krishnasakinala');
+  await page.getByRole('button', { name: 'Apply Coupon' }).click();
+  await expect(page.locator('#page-34')).toContainText('The minimum spend for this coupon is ₹450.00.');
+  await expect(page.locator('#page-34')).toContainText('₹400.00');
+  await expect(page.getByRole('strong')).toContainText('₹408.00');
+})
