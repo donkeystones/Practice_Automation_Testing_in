@@ -90,3 +90,12 @@ test('Home page - Arrivals - Images - Add to basket with more books', async ({ p
   await page.getByRole('button', { name: 'Add to basket' }).click();
   await expect(page.locator('#wpmenucartli')).toContainText('2 items₹1,000.00');
 });
+
+test('Home - Arrivals - Add to Basket - Items', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: ' 1 item -₹' }).click();
+  await expect(page.locator('#page-34')).toContainText('Selenium Ruby');
+  await expect(page.locator('#page-34')).toContainText('₹500.00');
+  await expect(page.locator('h2')).toContainText('Basket Totals');
+});
