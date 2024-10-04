@@ -138,3 +138,14 @@ test('Home - Arrivals - Add to basket - Items - Remove Book', async ({ page }) =
   await page.getByRole('link', { name: '×' }).click();
   await expect(page.locator('#page-34')).toContainText('Your basket is currently empty.');
 });
+
+test('Home - Arrivals - Add to Basket - Items - Add Book', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: ' 1 item -₹' }).click();
+  await expect(page.locator('#page-34')).toContainText('₹500.00');
+  await page.getByRole('spinbutton', { name: 'Qty' }).click();
+  await page.getByRole('spinbutton', { name: 'Qty' }).fill('2');
+  await page.getByRole('button', { name: 'Update Basket' }).click();
+  await expect(page.locator('#page-34')).toContainText('₹1,000.00');
+});
