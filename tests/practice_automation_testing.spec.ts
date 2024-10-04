@@ -52,6 +52,12 @@ test('Home page - images in arrivals should navigate to product page - Thinking 
     await expect(page.getByText('This book provides you with').first()).toBeVisible();
 });
 
+test('Home page - images in arrivals should navigate to product page - Thinking in HTML Product - Check reviews', async ({ page }) => {
+  await page.getByRole('link', { name: 'Sale! Thinking in HTML' }).click();
+  await page.getByRole('link', { name: 'Reviews (0)' }).click();
+  await expect(page.getByRole('heading', { name: 'Reviews' })).toBeVisible();  
+});
+
   test('Home page - images in arrivals should navigate to product page - Mastering Javascript Product - Check title and price', async ({ page }) => {
     await page.getByRole('link', { name: 'Mastering JavaScript' }).click();
     await expect(page.locator('h1')).toContainText('Mastering JavaScript');
@@ -61,4 +67,10 @@ test('Home page - images in arrivals should navigate to product page - Thinking 
   test('Home page - images in arrivals should navigate to product page - Mastering Javascript Product - Check Description', async ({ page }) => {
     await page.getByRole('link', { name: 'Mastering JavaScript' }).click();
     await expect(page.getByText('It would seem that everything').first()).toBeVisible();
+});
+
+test('Home page - images in arrivals should navigate to product page - Mastering Javascript Product - Check reviews', async ({ page }) => {
+  await page.getByRole('link', { name: 'Mastering JavaScript' }).click();
+  await page.getByRole('link', { name: 'Reviews (0)' }).click();
+  await expect(page.getByRole('heading', { name: 'Reviews' })).toBeVisible();  
 });
