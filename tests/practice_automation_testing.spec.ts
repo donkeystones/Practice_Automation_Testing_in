@@ -91,11 +91,30 @@ test('Home page - Arrivals - Images - Add to basket with more books', async ({ p
   await expect(page.locator('#wpmenucartli')).toContainText('2 items₹1,000.00');
 });
 
-test('Home - Arrivals - Add to Basket - Items', async ({ page }) => {
+test('Home - Arrivals - Add to Basket - Checkout via clicking on basket button top right corner', async ({ page }) => {
   await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
   await page.getByRole('button', { name: 'Add to basket' }).click();
   await page.getByRole('link', { name: ' 1 item -₹' }).click();
   await expect(page.locator('#page-34')).toContainText('Selenium Ruby');
   await expect(page.locator('#page-34')).toContainText('₹500.00');
   await expect(page.locator('h2')).toContainText('Basket Totals');
+});
+
+test('Home - Arrivals - Add to Basket - Checkout via clicking view basket button after adding to basket', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: 'View Basket' }).click();
+  await expect(page.locator('#page-34')).toContainText('₹500.00');
+  await expect(page.locator('#page-34')).toContainText('Selenium Ruby');
+});
+
+test('Home - Arrivals - Add to basket - checkout - apply coupon', async ({ page }) => {
+  await page.getByRole('link', { name: 'Selenium Ruby Selenium Ruby ₹' }).click();
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: 'View Basket' }).click();
+  await page.getByPlaceholder('Coupon code').click();
+  await page.getByPlaceholder('Coupon code').fill('krishnasakinala');
+  await page.getByRole('button', { name: 'Apply Coupon' }).click();
+  await expect(page.locator('#page-34')).toContainText('-₹50.00, Free shipping coupon [Remove]');
+  await expect(page.locator('#page-34')).toContainText('₹459.00');
 });
